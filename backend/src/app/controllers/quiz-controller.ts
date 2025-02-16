@@ -25,7 +25,7 @@ export class QuizController {
   async quizInfo(req: Request, res: Response, next: NextFunction): Promise<void> {
     console.log({ type: 'Controller', method: 'quizInfo', params: req.params, body: req.body })
     await this.#quizService
-      .quizInfo({ _id: req.params.quizzId })
+      .quizInfo({ _id: req.params.quizId })
       .then((data: IQuiz | null): void => {
         res.json({ data })
         next()

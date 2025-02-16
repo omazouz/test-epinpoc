@@ -17,8 +17,8 @@ export interface IBackendConfig {
 async function bootstrap(): Promise<void> {
   const config: IBackendConfig = {
     mongo: {
-      host: 'localhost',
-      port: 27021,
+      host: 'mongo',
+      port: 27017,
       databaseName: 'quizz',
     },
     filesPath: path.resolve('.', './datas'),
