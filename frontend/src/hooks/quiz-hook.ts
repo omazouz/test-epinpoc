@@ -1,24 +1,34 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
-import { IQuiz } from "../data-interfaces/quiz.interfaces";
-import { getQuizzes, deleteQuiz } from "../services/quiz-service";
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { IQuiz } from '../data-interfaces/quiz.interfaces';
+import { getQuizzes, deleteQuiz, createQuiz } from '../services/quiz-service';
 
 export const useQuizzes = () => {
   // Access the client
   const queryClient = useQueryClient();
   // Queries
-  const quizzesQuery = useQuery<IQuiz[]>("quizzes", getQuizzes);
+  const quizzesQuery = useQuery<IQuiz[]>('quizzes', getQuizzes);
+
   // Mutations
   const deleteQuizMutation = useMutation(deleteQuiz, {
     onSuccess: () => {
       // Invalidate and refetch
-      queryClient.invalidateQueries("quizzes");
+      queryClient.invalidateQueries('quizzes');
     },
   });
 
+  const createQuizMutation = useMutation(createQuiz, {
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries('quizzes');
+    },
+  });
   return {
     quizzes: quizzesQuery.data || [],
     deleteQuiz: (quizId: string) => {
       deleteQuizMutation.mutateAsync(quizId);
+    },
+    createQuiz: () => {
+      createQuizMutation.mutateAsync();
     },
   };
 };

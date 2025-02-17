@@ -24,4 +24,18 @@ export class QuizService {
     console.debug({ type: 'Service', method: 'quizDelete', filter })
     await QuizModel.deleteOne(filter).exec()
   }
+
+  async quizCreate(): Promise<IQuiz> {
+    console.debug({ type: 'Service', method: 'quizCreate' })
+    const dummyQuizz = {
+      name: 'Dummy Quiz',
+      questions: []
+    }
+    return (await QuizModel.create(dummyQuizz)).save()
+  }
+
+  async exportDatabase(): Promise<void> {
+    console.debug({ type: 'Service', method: 'exportDatabase' })
+    return await this.#coreService.exportDatabase()
+  }
 }
