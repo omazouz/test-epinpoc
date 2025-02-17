@@ -24,7 +24,7 @@
     "ws": "^8.8.1"
   },
   "scripts": {
-    "start:dev": "nodemon --ext js,json,ts --watch src/ --exec \"npm run build && npm run start\" & mongod --dbpath /tmp --port 27021 > /tmp/mongo_db_test.log && fg",
+    "start:dev": "nodemon --ext js,json,ts --watch src/ --exec \"npm run build && npm run start\" --legacy-watch ",
     "build": "rm -rf build && babel src --out-dir build --extensions \".ts\" && tsc",
     "start": "babel-node -x .ts -- src/index.ts",
     "lint": "eslint src",

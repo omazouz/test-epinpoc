@@ -14,16 +14,30 @@ export class FileManagerService {
     const importer: BackendImporter = new BackendImporter(this.#filesPath)
     const importResult: IFileImport = await importer.importFiles()
     // TODO : import all quizzes from file rather than only the first one
-    console.log(importResult.quizzes[0])
-    await new QuizModel(importResult.quizzes[0]).save()
+    if (importResult.quizzes.length > 0) {
+      //  insert all quizzes
+      await QuizModel.insertMany(importResult.quizzes)
+      console.log(`Successfully imported ${importResult.quizzes.length} quizzes.`)
+    } else {
+      console.log('No quizzes found to import.')
+    }
   }
 
   async exportDatabaseToFiles() {
     const exporter: BackendExporter = new BackendExporter(this.#filesPath)
     // TODO : get quizzes from database with QuizModel and put in files obj
-    const files: { quizzes: IQuiz[] } = {
-      quizzes: [],
+    try {
+      // Fetch quizzes from the database
+      const quizzes: IQuiz[] = await QuizModel.find()
+      // Create the files object with quizzes
+      const files: { quizzes: IQuiz[] } = {
+        quizzes: [],
+      }
+      // Export the quizzes to a file
+      await exporter.exportFiles(files)
+      console.log(`Successfully exported ${quizzes.length} quizzes to files.`)
+    } catch (error) {
+      console.error('Error exporting database:', error)
     }
-    await exporter.exportFiles(files)
   }
 }
