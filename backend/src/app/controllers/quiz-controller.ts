@@ -47,4 +47,31 @@ export class QuizController {
         next(err)
       })
   }
+
+  async quizCreate(req: Request, res: Response, next: NextFunction): Promise<void> {
+    console.log({ type: 'Controller', method: 'quizCreate' })
+    await this.#quizService
+      .quizCreate()
+      .then((data: IQuiz): void => {
+        res.json({ data })
+        next()
+      })
+      .catch((err: Error): void => {
+        next(err) 
+
+  })
+  }
+
+  async exportDatabase(req: Request, res: Response, next: NextFunction): Promise<void> {
+    console.log({ type: 'Controller', method: 'exportDatabase' })
+    await this.#quizService
+      .exportDatabase()
+      .then((): void => {
+        res.sendStatus(200)
+        next()
+      })
+      .catch((err: Error): void => {
+        next(err)
+      })
+  }
 }

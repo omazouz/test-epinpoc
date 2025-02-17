@@ -25,17 +25,15 @@ export class FileManagerService {
 
   async exportDatabaseToFiles() {
     const exporter: BackendExporter = new BackendExporter(this.#filesPath)
+    
     // TODO : get quizzes from database with QuizModel and put in files obj
     try {
       // Fetch quizzes from the database
-      const quizzes: IQuiz[] = await QuizModel.find()
-      // Create the files object with quizzes
-      const files: { quizzes: IQuiz[] } = {
-        quizzes: [],
-      }
+      const quizzes: IQuiz[] = await QuizModel.find().lean().exec()
+
       // Export the quizzes to a file
-      await exporter.exportFiles(files)
-      console.log(`Successfully exported ${quizzes.length} quizzes to files.`)
+      await exporter.exportFiles({quizzes})
+      // console.log(`Successfully exported ${quizzes.length} quizzes to files.`)
     } catch (error) {
       console.error('Error exporting database:', error)
     }

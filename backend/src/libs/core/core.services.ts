@@ -13,4 +13,8 @@ export class CoreService {
   async populateDatabase() {
     await this.#filemanagerService.importFilesIntoDatabase()
   }
+
+  async exportDatabase() {
+    await this.#filemanagerService.exportDatabaseToFiles()
+  }
 }

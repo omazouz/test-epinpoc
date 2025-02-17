@@ -71,6 +71,12 @@ sudo apt install mongodb-org
 
 - Visual studio code : https://code.visualstudio.com/
 
+## Run with docker
+
+1. Install docker on your machine
+2. run " docker-compose up " on the project root folder
+3. open the project on localhost:3000 (frontend) / localhost:3001 (backend) / localhost:27021 (mongo)
+
 ## Getting started
 
 1. Install dependencies
@@ -99,19 +105,19 @@ npm run start:dev
 
 4. Done, you should see a list of quiz appear with a delete button for each one
 
-5. (Optional) Initialize a repository with this project in a versionning tool like git or gitlab
+5. (Optional) Initialize a repository with this project in a versionning tool like git or gitlab (DONE)
 
 ## Subject
 
-1. In frontend, create a Quiz component that will display all the questions + answers of a quiz.
+1. In frontend, create a Quiz component that will display all the questions + answers of a quiz. (DONE)
 
-2. Correct answers are displayed differently from the wrong ones, change the opacity or the color (for example) to differentiate them
+2. Correct answers are displayed differently from the wrong ones, change the opacity or the color (for example) to differentiate them (DONE)
 
-3. Enhance the app to display multiple quiz :
+3. Enhance the app to display multiple quiz : (DONE)
 
-- in frontend : QuizList component should be able to display multiple quiz
-- in backend : Fix the backend to import at start of the database all the quizzes from the file quizzes.json
+- in frontend : QuizList component should be able to display multiple quiz (DONE)
+- in backend : Fix the backend to import at start of the database all the quizzes from the file quizzes.json (DONE)
 
-4. Continue to develop the feature where the button "add" in the frontend can add an dummy quiz (static text and 0 questions) to the quiz list
+4. Continue to develop the feature where the button "add" in the frontend can add an dummy quiz (static text and 0 questions) to the quiz list (DONE)
 
-5. Add a save button in frontend that tells the backend to export the new database content to the quizzes.json file
+5. Add a save button in frontend that tells the backend to export the new database content to the quizzes.json file (DONE)

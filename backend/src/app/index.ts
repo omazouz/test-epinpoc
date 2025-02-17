@@ -17,8 +17,8 @@ export interface IBackendConfig {
 async function bootstrap(): Promise<void> {
   const config: IBackendConfig = {
     mongo: {
-      host: 'mongo',
-      port: 27017,
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT || '27021'),
       databaseName: 'quizz',
     },
     filesPath: path.resolve('.', './datas'),
